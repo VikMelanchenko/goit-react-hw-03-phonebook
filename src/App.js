@@ -16,8 +16,6 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
   componentDidMount() {
@@ -33,9 +31,6 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     console.log('App componentDidUpdate');
-
-    // const nextContacts = this.state.contacts;
-    // const prevContacts = prevState.contacts;
 
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
@@ -73,7 +68,7 @@ class App extends Component {
   //  фильтр контактов
   getVisibleContacts = () => {
     const { filter, contacts } = this.state;
-    const normalizedFilter = filter.toString().toLowerCase();
+    const normalizedFilter = filter.toLowerCase();
 
     return contacts.filter((contact) =>
       contact.name.toLowerCase().includes(normalizedFilter)
