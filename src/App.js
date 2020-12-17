@@ -20,6 +20,28 @@ class App extends Component {
     number: '',
   };
 
+  componentDidMount() {
+    console.log('Component updated');
+
+    const contacts = localStorage.getItem('contacts');
+    const parcesContacts = JSON.parse(contacts);
+
+    if (parcesContacts) {
+      this.setState({ contacts: parcesContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('App componentDidUpdate');
+
+    // const nextContacts = this.state.contacts;
+    // const prevContacts = prevState.contacts;
+
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   // сабмит формы
   formSubmitHandler = (data) => {
     console.log(data);
